@@ -1,0 +1,66 @@
+package com.unInterrupted;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Flash.FlashObjectWebDriver;
+
+public class WatchActions {
+	WebDriver driver;
+	JavascriptExecutor jse;
+
+	public void browser() throws InterruptedException {
+		ChromeOptions ops = new ChromeOptions();
+        ops.addArguments("--disable-notifications");
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\Rajesh\\Desktop\\Automation\\chromedriver.exe");
+		driver = new ChromeDriver(ops);
+		
+		driver.manage().window().maximize();
+		//driver.get("https://www.uninterrupted.com/watch/ihXrSC55/le-bron-james-wants-to-see-more-unity?playlist=N4M8xKh5");
+		driver.get("https://www.uninterrupted.com/");
+		Thread.sleep(2000);
+		//driver.findElement(By.xpath(".//*[@id='root']/div/div[1]/span/div/div[1]/div[2]/div/div[2]/div[2]/div[1]/div/div[2]/a/div[2]")).click();
+		driver.findElement(By.cssSelector("#root > div > div.src-components-app-layout-__AppLayout_content_1JrRJ > span > div > div.src-components-hero-__Hero_hero_3G61R > div.src-components-hero-__Hero_wrap_2EzHd > div > div.src-components-video-carousel-__VideoCarousel_overlay_1BNfZ > div.src-components-video-carousel-__VideoCarousel_content_3QwD8 > div.src-components-video-carousel-__Item_host_1iSTf.src-components-video-carousel-__Item_isActive_19hDJ > div > div:nth-child(2) > a")).click();
+		
+		Thread.sleep(8000);
+		//WebElement player = driver.findElement(By.xpath(".//*[@id='player']/div[2]/video"));
+		WebElement player = driver.findElement(By.cssSelector("#player"));
+		Thread.sleep(2000);
+		WebElement play = driver.findElement(By.xpath(".//*[@id='player']/div[8]/div[4]/div[1]/div[1]"));
+		Thread.sleep(3000);
+		WebElement fullscreen = driver.findElement(By.xpath(".//*[@id='player']/div[8]/div[4]/div[3]/div[10]"));
+		Thread.sleep(3000);
+		WebElement mute = driver.findElement(By.xpath(".//*[@id='player']/div[8]/div[4]/div[3]/div[9]"));
+		
+		//Hover (driver,player);
+		HoverAndClick (driver, player, play);
+		HoverAndClick (driver, player, fullscreen);
+		HoverAndClick (driver, player, mute);
+		HoverAndClick (driver, player, play);
+		
+		
+	}
+	
+	public static void HoverAndClick(WebDriver driver, WebElement elementToHover, WebElement elementToClick) {
+		Actions  action = new Actions (driver);
+		action.moveToElement(elementToHover).click(elementToClick).build().perform();
+		}
+	
+	public static void main(String[] args) throws InterruptedException {
+		WatchActions myObj = new WatchActions();
+		myObj.browser();
+		
+
+	}
+
+}
