@@ -1,5 +1,7 @@
 package com.unInterrupted;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -24,14 +26,11 @@ public class WatchActions {
 		Thread.sleep(2000);
 		// Click on Watch Now button
 		driver.findElement(By.cssSelector("#root > div > div.src-components-app-layout-__AppLayout_content_1JrRJ > span > div > div.src-components-hero-__Hero_hero_3G61R > div.src-components-hero-__Hero_wrap_2EzHd > div > div.src-components-video-carousel-__VideoCarousel_overlay_1BNfZ > div.src-components-video-carousel-__VideoCarousel_content_3QwD8 > div.src-components-video-carousel-__Item_host_1iSTf.src-components-video-carousel-__Item_isActive_19hDJ > div > div:nth-child(2) > a")).click();
-		Thread.sleep(8000);
+		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 		// Identification of the webelements 
 		WebElement player = driver.findElement(By.cssSelector("#player"));
-		Thread.sleep(2000);
 		WebElement play = driver.findElement(By.xpath(".//*[@id='player']/div[8]/div[4]/div[1]/div[1]"));
-		Thread.sleep(3000);
 		WebElement fullscreen = driver.findElement(By.xpath(".//*[@id='player']/div[8]/div[4]/div[3]/div[10]"));
-		Thread.sleep(3000);
 		WebElement mute = driver.findElement(By.xpath(".//*[@id='player']/div[8]/div[4]/div[3]/div[9]"));
 		
 		//Hover (driver,player);
@@ -45,7 +44,8 @@ public class WatchActions {
 		HoverAndClick (driver, player, play);
 		// Action to view video in normal view
 		HoverAndClick (driver, player, fullscreen);
-		// Action to close the browser
+		// Action to  wait and close the browser
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.close();
 		
 	}
